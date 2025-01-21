@@ -3,6 +3,9 @@ import React, { isValidElement } from "react"
 //import  sub ,  { square , add } from "./App5" //can also import subtract , just that the default exports can be imported as any keyword
 import { canDrink , isAdult } from "./person"
 import validator from 'validator'
+import ReactDom from 'react-dom' ; 
+import './style.css' ; 
+
 
  
 const Person = {
@@ -13,11 +16,13 @@ const Person = {
 localStorage.setItem('name','dhruv') // storing a key at local levevl only
 
 
+
+
 const User = (props) => {
     return(
-        <div>
-            <p>Name: {props.name} </p>
-            <p>Age:{props.age} </p>
+        <div className="container">
+            <p className="name">Name: {props.name} </p>
+            <p className="age">Age:{props.age} </p>
             <p>{localStorage.getItem('name')}</p>
         </div>
     )
