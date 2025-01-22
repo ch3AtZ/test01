@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider, useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 const counterSlice = createSlice({
   name: 'counter',
@@ -24,10 +25,25 @@ const store = configureStore({
 
 export const { increment , decrement } = counterSlice.actions;
 
+const unsuscribe = store.subscribe(()=>{
+    console.log(store.getState());
+})
 
 const Counter = () => {
   const count = useSelector(state => state.counter.count);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Subscribe to store changes
+    const unsubscribe = store.subscribe(() => {
+      console.log('State changed:', store.getState());
+    });
+
+    // Cleanup: Unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div>
@@ -39,13 +55,14 @@ const Counter = () => {
     </div>
   );
 };
-''
+
 const App = () => {
   return (
     <Provider store={store}>
       <Counter />
     </Provider>
   );
+
 };
 
 export default App;
