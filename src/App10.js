@@ -69,7 +69,7 @@ store.dispatch(addExpense({description:'Grocery',note:`Amount for month of ${new
 
 const expenseOne = store.dispatch(addExpense({description:'Medical',note:`Amount for month of ${new Date().toLocaleString("default",{month:'long'})}` , amount:50 , createdAt:new Date().toLocaleDateString()})) // pass a constant
 
-store.dispatch(removeExpense({id : expenseOne.expense.id}))
+store.dispatch(removeExpense({id : expenseOne.expense.id})) // removing an expense based on the id 
 
 const demoState = { // just to set an example of how the output can look like 
     expenses: [{
