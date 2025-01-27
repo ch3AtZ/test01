@@ -19,8 +19,6 @@ const Note = () => {
 
     
 
-
-
     const addNote = (e) =>{
         e.preventDefault()
         setNote([

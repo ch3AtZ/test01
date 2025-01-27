@@ -9,6 +9,8 @@ import {Provider} from 'react-redux';
 import { Store } from './redux/store';
 import CombinedApp from './App9-redux';
 import Note from './Note';
+import TEST from './testapi';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +18,7 @@ root.render(
     {/* <Provider store={Store}>
     <App/>
     </Provider> */}
-    <Note/>
+    <TEST/>
     
   </React.StrictMode>
 );
