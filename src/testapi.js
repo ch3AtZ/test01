@@ -1,34 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const TEST = () =>{
+const TEST = () => {
+    const [data, SetData] = useState([]);
+    const [printedUserIds, setPrintedUserIds] = useState(new Set()); // Track printed userIds
 
-    const [data, SetData] = useState([])
-
-    async function getData(){
-        try{
+    async function getData() {
+        try {
             const response = await fetch('https://jsonplaceholder.typicode.com/albums');
             const result = await response.json();
-            SetData(result)
+
+            SetData(result); // Set all the data
+        } catch (error) {
+            console.error('Error', error);
         }
-         catch(error){
-            console.error('Error',error)
-         }
     }
 
-    getData();
-    
-    return(
+    useEffect(() => {
+        getData();
+    }, []);
+
+    return (
         <div>
-            {data.map((d)=>(
-                <div key={d.id}>
-                    <h1>{d.title}</h1>
-                    <h4>{d.userId}</h4>
-                </div>
+            {data.map((d, index) => {
+                if (!printedUserIds.has(d.userId)) {
+                    printedUserIds.add(d.userId); // Add the userId to the printed set
+                    setPrintedUserIds(new Set(printedUserIds)); // Update the state to trigger re-render
 
-            ))}
+                    return (
+                        <div key={d.id}>
+                            <h1>User ID: {d.userId}</h1>
+                        </div>
+                    );
+                }
+                return null; // Don't render if the userId is already printed
+            })}
         </div>
-    )
-
+    );
 }
 
 export default TEST;

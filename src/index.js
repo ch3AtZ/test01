@@ -18,7 +18,7 @@ root.render(
     {/* <Provider store={Store}>
     <App/>
     </Provider> */}
-    <TEST/>
+    <Note/>
     
   </React.StrictMode>
 );

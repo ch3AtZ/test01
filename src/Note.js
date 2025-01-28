@@ -8,17 +8,18 @@ const Note = () => {
     const [note , setNote] = useState(NotesData || []) // array of notes
     const [title , setTitle] = useState('') 
     const [body , setBody] = useState('')
-    
 
+    
 
     useEffect(()=>{
-        console.log('what the fdfd')
+        console.log('This should only run once')
+    },[]) // here it only runs once , not again because the array is left empty
+
+    useEffect(()=>{
+        console.log('changing document title')
         document.title = note.length
         
-    })
-
-    
-
+    } , [note]) // [note] makes the useEffect to run when only the count changes , lest it will run even if some other thing runs. 
     const addNote = (e) =>{
         e.preventDefault()
         setNote([
@@ -35,6 +36,18 @@ const Note = () => {
         setNote(note.filter((note)=>note.title !== title))
     }
 
+
+    useEffect(()=>{
+        const noteData = JSON.parse(localStorage.getItem('note'))   // same as  second lines of const Note
+        if (noteData){
+            setNote(noteData)
+        }
+    },[])
+
+    useEffect(()=>{                                                 // same as first line of const Note
+        localStorage.setItem('note',JSON.stringify(note))
+    },[note])
+    
     return(
         <div>
             <h1>NOTES</h1>

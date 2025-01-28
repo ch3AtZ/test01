@@ -71,7 +71,7 @@ const expenseOne = store.dispatch(addExpense({description:'Medical',note:`Amount
 
 store.dispatch(removeExpense({id : expenseOne.expense.id})) // removing an expense based on the id 
 
-const demoState = { // just to set an example of how the output can look like 
+/* const demoState = { // just to set an example of how the output can look like 
     expenses: [{
     id: 'poijasdfhwer',
     description: 'January Rent',
@@ -85,7 +85,7 @@ const demoState = { // just to set an example of how the output can look like
         startDate:'undefined',
         endDate:'undefined'
     }
-};
+}; */
 
 
 
